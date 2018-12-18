@@ -9,8 +9,10 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <main>
-        
-        <p><%= ans %></p>
+        <form method="POST" action="/cpu">
+            <input type="submit" value="CHECK">
+        </form>
+        <p><%- content %></p>
     </main>
     
   </body>
