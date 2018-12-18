@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
             req.session.blow = [];
             if(!err) {
                 var data = {
-                    title: 'VS CPU',
+                    msg: 'Ready to Start',
                     content: []
                 };
                 res.render('cpu', data);
@@ -39,6 +39,13 @@ router.post('/post', (req, res, next) => {
         for (var j = i + 1; j < ansAry.length; j++) {
             if (preAry[i] == preAry[j]) {
                 console.log('The same word is used!');
+                var data = {
+                    msg: 'You cannot use the same letters at once.',
+                    content: req.session.prediction,
+                    content2: req.session.hit,
+                    content3: req.session.blow
+                }
+                res.render('cpu', data);
                 return false;
             } else {
                 console.log('No Problem');
@@ -71,13 +78,26 @@ router.post('/post', (req, res, next) => {
         req.session.blow.push(blow);
     } else {
         //CLEAR処理
+        req.session.hit.push(hit);
+        req.session.blow.push(blow);
+        var data = {
+            msg: 'CLEAR!',
+            content: req.session.prediction,
+            content2: req.session.hit,
+            content3: req.session.blow
+        }
+        res.render('cpu', data);
+        delete req.session.prediction;
+        delete req.session.hit;
+        delete req.session.blow;
+        return false;
     }
 
     console.log(req.session.hit);
     console.log(req.session.blow);
 
     var data = {
-        title: 'TEST',
+        msg: 'Please input a predicting word. ',
         content: req.session.prediction,
         content2: req.session.hit,
         content3: req.session.blow

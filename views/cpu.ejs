@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>VS CPU</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>VS CPU</h1>
     <main>
+        <p><%= msg %></p>
         <form method="POST" action="/cpu/post">
-            <input type="text" name="predict">
+            <input type="text" name="predict" maxlength="4" minlength="4">
             <input type="submit" value="CHECK">
         </form>
         <ul>
@@ -17,6 +17,7 @@
             <li><%= content[i] %><span>&nbsp;&nbsp;hit<%= content2[i] %></span><span>blow<%= content3[i] %></span></li>
             <% } %>
         </ul>
+        <a href="/cpu">Try again?</a>
     </main>
     
   </body>
