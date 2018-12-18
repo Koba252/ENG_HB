@@ -1,8 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* 初期化 */
+body, p, h1, h2, h3, h4, h5, h6, div, a, header, main, footer{
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+  color: #000000;
+}
+main{
+  display: block;
 }
 
-a {
-  color: #00B7FF;
+/* デザイン */
+body {
+  margin: 0 auto;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
