@@ -3,15 +3,16 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/javascripts/main1.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <main>
-        <form >
-            <input>
-            <input>
-        </form>
+        <p>Prediction</p>
+        <input type="text" id="predict" value="test" maxlength="4">
+        <input type="button" value="CLICK" onclick="getValue2('predict')">
+        <div id="preList"></div>
     </main>
   </body>
 </html>

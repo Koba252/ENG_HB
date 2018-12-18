@@ -3,10 +3,11 @@ var router = express.Router();
 
 /* GET CPU */
 router.get('/', function(req, res, next) {
-  res.render('index', {
+  res.render('cpu', {
     title: 'VS CPU' 
     });
 });
+
 
 
 module.exports = router;
