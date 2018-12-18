@@ -4,7 +4,7 @@ var sqlite3 = require('sqlite3');
 
 var db = new sqlite3.Database('engdic.sqlite3');
 
-/* GET CPU */
+// GET処理
 router.get('/', (req, res, next) => {
     db.serialize(() => {
         db.get("SELECT * FROM items ORDER BY RANDOM()", (err, rows) => {
@@ -27,7 +27,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-/* POST処理 */
+// POST処理
 router.post('/post', (req, res, next) => {
     var ansAry = req.session.answer;
     console.log(ansAry);
