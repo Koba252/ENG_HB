@@ -9,11 +9,15 @@ router.get('/', (req, res, next) => {
     db.serialize(() => {
         db.get("SELECT * FROM items ORDER BY RANDOM()", (err, rows) => {
             console.log(rows);
-            req.session.answer = rows.word;
+            var ans = rows.word;
+            var ansAry = ans.split('');
+            req.session.answer = ansAry;
+            console.log(req.session.answer);
+            req.session.prediction = [];
             if(!err) {
                 var data = {
                     title: 'VS CPU',
-                    content: 'null'
+                    content: []
                 };
                 res.render('cpu', data);
             }
@@ -21,10 +25,16 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/post', (req, res, next) => {
+    console.log(req.session.answer);
+    var pre = req.body['predict'];
+    var preAry = pre.split('');
+    console.log(preAry);
+    req.session.prediction.push(pre);
+    console.log(req.session.prediction);
     var data = {
         title: 'TEST',
-        content: req.session.answer
+        content: req.session.prediction
     }
     res.render('cpu', data);
 });

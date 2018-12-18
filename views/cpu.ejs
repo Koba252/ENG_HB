@@ -3,16 +3,20 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type="text/javascript" src="/javascripts/vs1.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <main>
-        <form method="POST" action="/cpu">
+        <form method="POST" action="/cpu/post">
+            <input type="text" name="predict">
             <input type="submit" value="CHECK">
         </form>
-        <p><%- content %></p>
+        <ul>
+            <% for (var i = 0; i < content.length; i++) { %>
+            <li><%= content[i] %></li>
+            <% } %>
+        </ul>
     </main>
     
   </body>
