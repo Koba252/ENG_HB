@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CPU：<%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <header class="header_cpu">
+        <nav>
+            <ul>
+                <li><a href="/cpu/easy">easy</a></li>
+                <li><a href="/cpu/normal">normal</a></li>
+                <li><a href="/cpu/hard">hard</a></li>
+            </ul>
+        </nav>
+        <div>
+            <a class="retry" href="/cpu/<%= title %>"><img src="/images/retry.png"><span>RETRY</span></a>
+        </div>
+    </header>
+    <main>
+        <p class="<%= letter_color %>"><%= msg %></p>
+        <div class="clear_box">
+            <p><%= answerMean %></p>
+        </div>
+        <div class="list_box">
+            <% for (var i = 0; i < content.length; i++) { %>
+            <div>
+                <p><%= content[i] %></p>
+                <p><%= content2[i] %>H</p>
+                <p><%= content3[i] %>B</p>
+            </div>
+            <% } %>
+        </div>
+    </main>
+</body>
+</html>

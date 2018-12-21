@@ -23,7 +23,7 @@ input, button {
   appearance: none;
 }
 
-/* design_whole */
+/* whole */
 body {
   margin: 0 auto;
   font: "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -31,7 +31,7 @@ body {
   color: #707070;
 }
 
-/* design_header */
+/* header_cpu */
 .header_cpu{
   width: 100%;
   display: flex;
@@ -70,7 +70,7 @@ body {
   font-size: 1.4em;
 }
 
-/* design_main */
+/* main_cpu */
 main{
   margin: 0 auto;
   margin-top: 50px;
@@ -143,4 +143,11 @@ main{
 }
 .list_box p:first-child{
   margin-right: auto;
+}
+
+/* main_clear */
+.clear_box{
+  margin-top: 50px;
+  font-size: 1.6em;
+  text-align: center;
 }

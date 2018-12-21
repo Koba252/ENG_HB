@@ -145,9 +145,10 @@ router.post('/post', (req, res, next) => {
             msg: 'CLEAR!',
             content: req.session.prediction,
             content2: req.session.hit,
-            content3: req.session.blow
+            content3: req.session.blow,
+            answerMean: req.session.ansMean
         }
-        res.render('cpu', data);
+        res.render('clear', data);
         delete req.session.ansMean;
         delete req.session.answer;
         delete req.session.prediction;
