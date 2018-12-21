@@ -1,5 +1,5 @@
 /* init */
-body, p, h1, h2, h3, h4, h5, h6, div, a, header, main, footer, ul, li, form, input{
+body, p, h1, h2, h3, h4, h5, h6, div, a, header, main, footer, ul, li, form, input, nav{
   margin: 0;
   padding: 0;
 }
@@ -32,11 +32,24 @@ body {
 }
 
 /* design_header */
-header{
+.header_cpu{
   width: 100%;
-  height: 34px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+.header_cpu nav{
+  font-size: 1.4em;
+  padding: 5px;
+}
+.header_cpu nav ul li{
+  margin-bottom: 5px;
+}
+.header_cpu nav ul li:hover{
+  opacity: .5;
+  transition: .5s;
+}
+.header_cpu div{
+  height: 34px;
 }
 .retry{
   height: 100%;

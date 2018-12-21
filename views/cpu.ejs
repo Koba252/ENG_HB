@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>VS CPU</title>
+    <title>CPU：<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
-    <header>
-        <a class="retry" href="/cpu"><img src="/images/retry.png"><span>RETRY</span></a>
+    <header class="header_cpu">
+        <nav>
+            <ul>
+                <li><a href="/cpu/easy">easy</a></li>
+                <li><a href="/cpu/normal">normal</a></li>
+                <li><a href="/cpu/hard">hard</a></li>
+            </ul>
+        </nav>
+        <div>
+            <a class="retry" href="/cpu/<%= title %>"><img src="/images/retry.png"><span>RETRY</span></a>
+        </div>
     </header>
     <main>
         <p class="<%= letter_color %>"><%= msg %></p>

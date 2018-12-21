@@ -5,7 +5,7 @@ var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database('engdic.sqlite3');
 
 // GET処理、難易度NORMAL
-router.get('/', (req, res, next) => {
+router.get('/normal', (req, res, next) => {
     db.serialize(() => {
         db.get("SELECT * FROM items where level > 0 ORDER BY RANDOM()", (err, rows) => {
             console.log(rows);
@@ -18,8 +18,10 @@ router.get('/', (req, res, next) => {
             req.session.hit = [];
             req.session.blow = [];
             if(!err) {
+                req.session.title = 'normal';
                 var data = {
-                    letter_color: "letter_defo",
+                    title: req.session.title,
+                    letter_color: 'letter_defo',
                     msg: '半角英小文字を4文字入力してください',
                     content: []
                 };
@@ -43,7 +45,9 @@ router.get('/hard', (req, res, next) => {
             req.session.hit = [];
             req.session.blow = [];
             if(!err) {
+                req.session.title = 'hard';
                 var data = {
+                    title: req.session.title,
                     letter_color: "letter_defo",
                     msg: '半角英小文字を4文字入力してください',
                     content: []
@@ -68,7 +72,9 @@ router.get('/easy', (req, res, next) => {
             req.session.hit = [];
             req.session.blow = [];
             if(!err) {
+                req.session.title = 'easy';
                 var data = {
+                    title: req.session.title,
                     letter_color: "letter_defo",
                     msg: '半角英小文字を4文字入力してください',
                     content: []
@@ -93,6 +99,7 @@ router.post('/post', (req, res, next) => {
             if (preAry[i] == preAry[j]) {
                 console.log('The same word is used!');
                 var data = {
+                    title: req.session.title,
                     letter_color: "letter_red",
                     msg: '※同じ文字は一度にひとつまで使えます',
                     content: req.session.prediction,
@@ -133,6 +140,7 @@ router.post('/post', (req, res, next) => {
         req.session.hit.push(hit);
         req.session.blow.push(blow);
         var data = {
+            title: req.session.title,
             letter_color: "letter_clear", 
             msg: 'CLEAR!',
             content: req.session.prediction,
@@ -152,6 +160,7 @@ router.post('/post', (req, res, next) => {
     console.log(req.session.blow);
 
     var data = {
+        title: req.session.title,
         letter_color: "letter_defo",
         msg: '半角英小文字を4文字入力してください',
         content: req.session.prediction,
