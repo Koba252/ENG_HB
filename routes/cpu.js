@@ -7,8 +7,9 @@ var db = new sqlite3.Database('engdic.sqlite3');
 // GET処理
 router.get('/', (req, res, next) => {
     db.serialize(() => {
-        db.get("SELECT * FROM items ORDER BY RANDOM()", (err, rows) => {
+        db.get("SELECT * FROM items where level > 0 ORDER BY RANDOM()", (err, rows) => {
             console.log(rows);
+            req.session.ansMean = rows.mean;
             var ans = rows.word;
             var ansAry = ans.split('');
             req.session.answer = ansAry;
@@ -18,7 +19,8 @@ router.get('/', (req, res, next) => {
             req.session.blow = [];
             if(!err) {
                 var data = {
-                    msg: 'Ready to Start',
+                    letter_color: "letter_defo",
+                    msg: '半角英小文字を4文字入力してください',
                     content: []
                 };
                 res.render('cpu', data);
@@ -35,20 +37,20 @@ router.post('/post', (req, res, next) => {
     var preAry = pre.split('');
     console.log(preAry);
     
+    //同じ文字が使われているか確認
     for (var i = 0; i < ansAry.length; i++) {
         for (var j = i + 1; j < ansAry.length; j++) {
             if (preAry[i] == preAry[j]) {
                 console.log('The same word is used!');
                 var data = {
-                    msg: 'You cannot use the same letters at once.',
+                    letter_color: "letter_red",
+                    msg: '※同じ文字は一度にひとつまで使えます',
                     content: req.session.prediction,
                     content2: req.session.hit,
                     content3: req.session.blow
                 }
                 res.render('cpu', data);
                 return false;
-            } else {
-                console.log('No Problem');
             }
         }
     }
@@ -81,12 +83,15 @@ router.post('/post', (req, res, next) => {
         req.session.hit.push(hit);
         req.session.blow.push(blow);
         var data = {
+            letter_color: "letter_clear", 
             msg: 'CLEAR!',
             content: req.session.prediction,
             content2: req.session.hit,
             content3: req.session.blow
         }
         res.render('cpu', data);
+        delete req.session.ansMean;
+        delete req.session.answer;
         delete req.session.prediction;
         delete req.session.hit;
         delete req.session.blow;
@@ -97,7 +102,8 @@ router.post('/post', (req, res, next) => {
     console.log(req.session.blow);
 
     var data = {
-        msg: 'Please input a predicting word. ',
+        letter_color: "letter_defo",
+        msg: '半角英小文字を4文字入力してください',
         content: req.session.prediction,
         content2: req.session.hit,
         content3: req.session.blow

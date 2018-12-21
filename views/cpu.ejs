@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>VS CPU</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>VS CPU</h1>
+</head>
+<body>
+    <header>
+        <a class="retry" href="/cpu"><img src="/images/retry.png"><span>RETRY</span></a>
+    </header>
     <main>
-        <p><%= msg %></p>
-        <form method="POST" action="/cpu/post">
-            <input type="text" name="predict" maxlength="4" minlength="4">
-            <input type="submit" value="CHECK">
+        <p class="<%= letter_color %>"><%= msg %></p>
+        <form class="form_box" method="POST" action="/cpu/post">
+            <input class="input_box" type="text" name="predict" maxlength="4" minlength="4" pattern="^[a-z]+$" autocomplete="off" spellcheck="false">
+            <input class="btn_check" type="submit" value="CHECK">
         </form>
-        <ul>
+        <div class="list_box">
             <% for (var i = 0; i < content.length; i++) { %>
-            <li><%= content[i] %><span>&nbsp;&nbsp;hit<%= content2[i] %></span><span>blow<%= content3[i] %></span></li>
+            <div>
+                <p><%= content[i] %></p>
+                <p><%= content2[i] %>H</p>
+                <p><%= content3[i] %>B</p>
+            </div>
             <% } %>
-        </ul>
-        <a href="/cpu">Try again?</a>
+        </div>
     </main>
-    
-  </body>
+</body>
 </html>
