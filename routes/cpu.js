@@ -4,10 +4,60 @@ var sqlite3 = require('sqlite3');
 
 var db = new sqlite3.Database('engdic.sqlite3');
 
-// GET処理
+// GET処理、難易度NORMAL
 router.get('/', (req, res, next) => {
     db.serialize(() => {
         db.get("SELECT * FROM items where level > 0 ORDER BY RANDOM()", (err, rows) => {
+            console.log(rows);
+            req.session.ansMean = rows.mean;
+            var ans = rows.word;
+            var ansAry = ans.split('');
+            req.session.answer = ansAry;
+            console.log(req.session.answer);
+            req.session.prediction = [];
+            req.session.hit = [];
+            req.session.blow = [];
+            if(!err) {
+                var data = {
+                    letter_color: "letter_defo",
+                    msg: '半角英小文字を4文字入力してください',
+                    content: []
+                };
+                res.render('cpu', data);
+            }
+        });
+    });
+});
+
+// GET処理、難易度HARD
+router.get('/hard', (req, res, next) => {
+    db.serialize(() => {
+        db.get("SELECT * FROM items ORDER BY RANDOM()", (err, rows) => {
+            console.log(rows);
+            req.session.ansMean = rows.mean;
+            var ans = rows.word;
+            var ansAry = ans.split('');
+            req.session.answer = ansAry;
+            console.log(req.session.answer);
+            req.session.prediction = [];
+            req.session.hit = [];
+            req.session.blow = [];
+            if(!err) {
+                var data = {
+                    letter_color: "letter_defo",
+                    msg: '半角英小文字を4文字入力してください',
+                    content: []
+                };
+                res.render('cpu', data);
+            }
+        });
+    });
+});
+
+// GET処理、難易度EASY
+router.get('/easy', (req, res, next) => {
+    db.serialize(() => {
+        db.get("SELECT * FROM items where level > 1 ORDER BY RANDOM()", (err, rows) => {
             console.log(rows);
             req.session.ansMean = rows.mean;
             var ans = rows.word;
