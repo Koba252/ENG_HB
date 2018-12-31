@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+    </script>
+</head>
+<body>
+    <main>
+        <p><%= msg %></p>
+        <form class="form_box" method="POST" action="/cpu/post">
+            <input class="input_box" type="text" name="predict" maxlength="4" minlength="4" pattern="^[a-z]+$" autocomplete="off" spellcheck="false">
+            <input class="btn_check" type="submit" value="CHECK">
+        </form>
+    </main>
+</body>
+</html>
